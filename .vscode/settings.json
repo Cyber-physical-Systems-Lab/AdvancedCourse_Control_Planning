@@ -1,0 +1,20 @@
+{
+  "python.analysis.extraPaths": [
+    "/opt/ros/humble/lib/python3.10/site-packages",
+    "/opt/ros/humble/local/lib/python3.10/dist-packages",
+    "/dobot_ws/shared/ros_ws/ROS_GuYue_ROS2_Tutorial/install/learning_interface/local/lib/python3.10/dist-packages"
+  ],
+  "cmake.sourceDirectory": "/dobot_ws/shared/ros_ws/ROS_GuYue_ROS2_Tutorial/src/learning_interface",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.addImport.heuristics": false,
+  "python.analysis.packageIndexDepths": [
+      { "name": "rclpy", "depth": 3, "includeAllSymbols": true },
+      { "name": "std_msgs", "depth": 3, "includeAllSymbols": true },
+      { "name": "geometry_msgs", "depth": 3, "includeAllSymbols": true },
+      { "name": "sensor_msgs", "depth": 3, "includeAllSymbols": true },
+      { "name": "learning_interface", "depth": 3, "includeAllSymbols": true },
+      { "name": "launch", "depth": 3, "includeAllSymbols": true },
+      { "name": "launch_ros", "depth": 3, "includeAllSymbols": true },
+      { "name": "tf2_ros", "depth": 3, "includeAllSymbols": true },
+  ]
+}
