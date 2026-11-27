@@ -676,6 +676,20 @@
       <state_interface name="velocity" />
     </joint>
   </ros2_control>
+  <gazebo reference="joint6">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo>
+    <plugin name="wrist_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <ros>
+        <namespace>/wrist_ft</namespace>
+      </ros>
+      <joint_name>joint6</joint_name>
+      <frame_name>Link6</frame_name>
+      <update_rate>100</update_rate>
+      <gaussian_noise>0.2</gaussian_noise>
+    </plugin>
+  </gazebo>
   <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <parameters>__DESC_DIR__/controllers.yaml</parameters>

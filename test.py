@@ -5,6 +5,7 @@ import numpy as np
 from rclpy import node
 from utils.approach import start_subscribe_joints
 from utils.constants import HOME_NOVA5
+from utils.force_sensor.force_sensor import ForceDataNode
 from utils.kinematics import calculate_IK, calculate_Jocabin, forward_kinematics
 from utils.parse_urdf import parse_urdf
 from utils.trajectory import cal_road_points, send_trajectory
@@ -62,6 +63,12 @@ if __name__ == '__main__':
     # print(down_action_way_points)
     # print(down_action_times)
     send_trajectory(node, ['joint1','joint2','joint3','joint4','joint5', 'joint6'], down_action_way_points, down_action_times)
+    # Start to collect the data of force sensor
+    # ============================================================
+    force_sub_node = ForceDataNode(node)
+    mean_fxs,std_fxs = force_sub_node.get_zero_points_std()
+    mean_fx = mean_fxs[0]
+    std_fx = std_fxs[0]
     # calculate the horizontal movement
     T_pull_horizontal_destination = T_grasp.copy()
     T_pull_horizontal_destination[0, 3] -= 0.16
@@ -69,7 +76,10 @@ if __name__ == '__main__':
     pull_action_way_points, pull_action_times = calculate_direct_line_move(down_action_way_points[-1],T_pull_horizontal_destination,joints)
     # print(down_action_way_points)
     # print(down_action_times)
+    # 水平拉动塑料箱的动作
+    force_sub_node.start_monitoring(mean_fx,std_fx)
+    print('monitor on:', force_sub_node.monitor)
     send_trajectory(node, ['joint1','joint2','joint3','joint4','joint5', 'joint6'], pull_action_way_points, pull_action_times)
-
+    print('pull returned')
 
     
